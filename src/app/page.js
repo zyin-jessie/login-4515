@@ -7,7 +7,7 @@ export default function Page() {
       <section class="bg-default font-primary h-screen flex select-none">
         <div class="seal large:flex tiny:hidden">
             <div class="poly flex items-center justify-center">
-                <Image src="/NEU_logo.png" alt='logo' width={200} height={100} class="rounded-full h-72 w-auto"></Image>
+                <Image src="/NEU_Logo.png" alt='logo' width={200} height={100} class="rounded-full h-72 w-auto"></Image>
             </div>
         </div>
         <div class="flex flex-col justify-center items-center w-full">
