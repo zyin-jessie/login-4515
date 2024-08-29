@@ -1,36 +1,7 @@
-'use client'
 import React from 'react'
 import Image from 'next/image'
-import { useFormik } from 'formik';
-import * as yup from 'yup';
 
 export default function page() {
-
-
-    const signupSchema = yup.object().shape({
-        fname: yup.string().required("Required"),
-        lname: yup.string().required("Required"),
-        access: yup.string().required("Access cannot be empty"),
-        email: yup.string().email("Please enter a valid email").required("Please enter a valid email"),
-        pwd: yup.string().min(8,"Password must contain 8 characters").required("Please enter a valid password"),
-        cpwd: yup.string().oneOf([yup.ref('pwd'), null], "Password does not match!").required("Please enter a valid password"),
-    })
-    const onSubmit =(values, actions) => {
-        console.log(values);
-        console.log(actions);
-        actions.resetForm();
-    }
-        const {values, errors, touched, handleBlur, handleChange, handleSubmit} = useFormik({
-        initialValues: {
-            fname: "",
-            lname: "",
-            email: "",
-            pwd: "",
-            cpwd: "",
-            access: "",
-        },
-        validationSchema: signupSchema, onSubmit,
-    });
   return (
     <div>
     <section class="bg-default font-primary h-screen flex select-none">
