@@ -44,3 +44,8 @@
   width: min(100%, 450px);
   padding-inline: 15px;
 }
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
+}

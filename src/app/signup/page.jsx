@@ -19,12 +19,9 @@ export default function Page() {
     }
     const {values, errors, touched, handleBlur, handleChange, handleSubmit} = useFormik({
         initialValues: {
-            fname: "",
-            lname: "",
             email: "",
             pwd: "",
             cpwd: "",
-            access: "",
         },
         validationSchema: signupSchema, onSubmit,
     });

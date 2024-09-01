@@ -1,11 +1,38 @@
 'use client'
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog"
 import React from 'react'
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 import Image from 'next/image'
 import { FaFacebook, FaGoogle } from "react-icons/fa6";
 import { signIn } from 'next-auth/react';
 import { SessionProvider } from "next-auth/react"
+import Link from "next/link"
+
+
 
 export default function Page() {
+    const signupSchema = yup.object().shape({
+        email: yup.string().email("Please enter a valid email or username").required("Please enter a valid email or username"),
+        pwd: yup.string().min(8,"Password must contain 8 characters").required("Please enter a valid password"),
+    })
+    const onSubmit =(values, actions) => {
+        console.log(values);
+        console.log(actions);
+        actions.resetForm();
+        alert("Form Submitted");
+    }
+    const {values, errors, touched, handleBlur, handleChange, handleSubmit} = useFormik({
+        initialValues: {
+            fname: "",
+            lname: "",
+            email: "",
+            pwd: "",
+            cpwd: "",
+            access: "",
+        },
+        validationSchema: signupSchema, onSubmit,
+    });
   return (
     <div>
       <section class="bg-default font-primary h-screen flex select-none">
@@ -19,7 +46,7 @@ export default function Page() {
                 <div class='title mb-10'>
                     <h1 class="text-2xl font-bold"><span class="font-bold text-5xl text-primary">NEU Login</span> <br /> Central Branch</h1>
                 </div>
-                <form action="#">
+                <form action="#" onSubmit={handleSubmit}>
 
                     <div className='flex gap-2 mb-5'>
                         <button type='button' onClick={() => signIn('google')} className='bg-white cursor-pointer w-full rounded-md border-0 py-3.5 shadow-sm px-5 flex items-center justify-center gap-3'><Image src="/google.png" alt='google' width={100} height={100} className='w-[23px]'></Image></button>
@@ -32,17 +59,38 @@ export default function Page() {
                     </span>
 
                     <div class='username mt-5 mb-2'>
-                        <input type="text" name="username" placeholder="Email / Username" class="block w-full rounded-md border-0 py-3.5 shadow-sm px-5"/>
+                        <input type="text" name="email" value={values.email} onChange={handleChange} onBlur={handleBlur} placeholder="Email / Username" class={`block w-full rounded-md border-0 py-3.5 shadow-sm px-5 ${errors.email && touched.email ? "border-2 border-danger" : ""}`}/>
+                        {errors.email && touched.email && <p className='text-danger text-sm'>{errors.email}</p>}
                     </div>
                     <div class='password'>
-                        <input type="password" name="password" autoComplete="off" placeholder="Password" class="block w-full rounded-md border-0 py-3.5 shadow-sm px-5"/>
+                        <input type="password" name="pwd" value={values.pwd} onChange={handleChange} onBlur={handleBlur} autoComplete="off" placeholder="Password" class={`block w-full rounded-md border-0 py-3.5 shadow-sm px-5 ${errors.pwd && touched.pwd ? "border-2 border-danger" : ""}`}/>
+                        {errors.pwd && touched.pwd && <p className='text-danger text-sm'>{errors.pwd}</p>}
                     </div>
                     <div class="flex justify-between text-right my-2 text-sm">
                         <label for="remember" className='flex items-center justify-center transition-all gap-1 hover:text-primary has-[:checked]:text-primary'>
                             <input type="checkbox" id='remember' name="remember" />
                             Remember me
                         </label>
-                        <a href="#" class="text-primary hover:text-blue-700">Forgot password?</a>
+                        <AlertDialog>
+                            <AlertDialogTrigger asChild>
+                                <Link href="#" class="text-primary hover:text-blue-700">Forgot password?</Link>
+                            </AlertDialogTrigger>
+                            <AlertDialogContent>
+                                    <AlertDialogHeader>
+                                        <div className="flex justify-between">
+                                            <div>
+                                                <AlertDialogTitle>Recover your account</AlertDialogTitle>
+                                                <AlertDialogDescription>Enter your email to recover your account</AlertDialogDescription>
+                                            </div>
+                                            <AlertDialogCancel>X</AlertDialogCancel>
+                                        </div>
+                                        <input type="text" name="email" placeholder="example@gmail.com" class='block w-full rounded-md border-0 py-3 shadow-sm px-5'/>
+                                    </AlertDialogHeader>
+                                    <AlertDialogFooter>
+                                        <AlertDialogAction className="w-full bg-blue-600 hover:bg-blue-700" >Submit</AlertDialogAction>
+                                    </AlertDialogFooter>
+                            </AlertDialogContent>
+                        </AlertDialog>
                     </div>
                     <div class='login-btn'>
                         <button class="flex items-center justify-center py-3 px-3.5 rounded-md text-light bg-blue-600 hover:bg-blue-700 w-full">Log in</button>
