@@ -5,7 +5,6 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 
 export default function Page() {
-    
     const signupSchema = yup.object().shape({
         email: yup.string().email("Please enter a valid email or username").required("Please enter a valid email or username"),
         pwd: yup.string().min(8,"Password must contain 8 characters").required("Please enter a valid password"),
@@ -31,13 +30,12 @@ export default function Page() {
         <section class="bg-default font-primary h-screen flex select-none">
             <div class="seal large:flex tiny:hidden">
                 <div class="poly flex items-center justify-center">
-                    <Image src="/NEU_Logo.png" alt='logo' width={200} height={200} class="rounded-full h-72 w-auto"></Image>
                 </div>
             </div>
             <div class="flex flex-col justify-center items-center w-full">
                 <div class="form">
                     <div class='title mb-10'>
-                        <h1 class="text-2xl font-bold"><span class="font-bold text-5xl text-primary">Registration</span> <br /> Central Branch</h1>
+                        <h1 class="text-2xl font-bold"><span class="font-bold text-5xl text-primary">Hospital</span> <br /> Sign up</h1>
                     </div>
                     <form action="#" onSubmit={handleSubmit}>
                         <div class='username mt-5 mb-2'>

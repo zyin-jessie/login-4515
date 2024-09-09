@@ -35,7 +35,7 @@
 .poly {
   @apply fixed h-full flex items-center justify-center;
   width: 570px;
-  background: url(/NEU_Backgroud.jpg) right no-repeat;
+  background: url(/iff.jpg) left no-repeat;
   background-size: cover;
   -webkit-clip-path: polygon(0 0, 75% 0%, 100% 50%, 75% 100%, 0 100%, 0% 50%);
   clip-path: polygon(0 0, 75% 0%, 100% 50%, 75% 100%, 0 100%, 0% 50%);
