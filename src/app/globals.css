@@ -15,7 +15,7 @@
   width: 6px;
   position: absolute;
 }
-.seal {
+.poly {
   background: #0D6EFD;
   min-width: 600px;
   height: 100vh;
@@ -23,7 +23,7 @@
   -webkit-clip-path: polygon(0 0, 75% 0%, 100% 50%, 75% 100%, 0 100%, 0% 50%);
   clip-path: polygon(0 0, 75% 0%, 100% 50%, 75% 100%, 0 100%, 0% 50%);
 }
-.seal::before {
+.poly::before {
   background: #0D6EFD;
   content: "";
   position: absolute;
@@ -32,7 +32,7 @@
   -webkit-clip-path: polygon(0 0, 75% 0%, 100% 50%, 75% 100%, 0 100%, 0% 50%);
   clip-path: polygon(0 0, 75% 0%, 100% 50%, 75% 100%, 0 100%, 0% 50%);
 }
-.poly {
+.poly-bg {
   @apply fixed h-full flex items-center justify-center;
   width: 570px;
   background: url(/iff.jpg) left no-repeat;
@@ -43,6 +43,15 @@
 .form {
   width: min(100%, 450px);
   padding-inline: 15px;
+}
+.separator {
+  @apply absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-transparent bg-gradient-to-r from-transparent via-[#6e6d7a] to-transparent opacity-75;
+}
+.separator-text {
+  @apply relative z-10 bg-default text-gray-400 px-6 text-sm;
+}
+.auth-btn {
+  @apply bg-white cursor-pointer w-full rounded-md border-0 py-3.5 shadow-sm px-5 flex items-center justify-center gap-3;
 }
 @layer base {
   :root {
